@@ -115,7 +115,7 @@ def pressRB():
     if shooterPowerAdj >= 0.9:
         print("range is maxed")
     else:
-        shooterRange += 0.05
+        shooterPowerAdj += 0.05
         print("range increased, new shooterPowerAdj = ", shooterPowerAdj)
 
 def pressLT():
