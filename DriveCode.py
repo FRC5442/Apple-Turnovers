@@ -32,8 +32,10 @@ center = 1500
 shooterRange = 1000
 shooterMin = 1000
 
-centerAdj = 50 #Adjust center of pwm range for drive
+centerAdj = 80 #Adjust center of pwm range for drive
 powerAdj = 0.5 #Adjust limts of pwm range for drive (percentage)
+
+shooterPowerAdj = 0.5
 
 leftMotor = 0
 rightMotor = 1
@@ -47,9 +49,9 @@ servo = 3
 
 ---------------------------------'''
 
-def remapShooter(oldValue):
+def remapShooter(rawInput, cntAdj, pwrAdj):
     #Method to remap shooter motor PWM value
-    value = (((oldValue + 1) * shooterRange) / 2) + shooterMin
+    value = 1500 + cntAdj + (500 * pwrAdj * rawInput)
     return value
 
 def remapDrive(rawInput, centAdj, pwrAdj):
@@ -73,12 +75,12 @@ def exitProc():
 
 def pressA():
     #when pressed, turn shooter motor on
-    pwm.setServoPulse(shooter, remapShooter(-1))
-    print("Motor: ON   Output:", remapShooter(-1), "    Precentage:", shooterRange/10)
+    pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, shooterPowerAdj))
+    print("Motor: ON   Output:", remapShooter(-1, centerAdj, shooterPowerAdj), "    Precentage:", shooterPowerAdj)
 
 def pressB():
     #when pressed, turn shooter motor off
-    pwm.setServoPulse(shooter, remapShooter(0))
+    pwm.setServoPulse(shooter, remapShooter(0, centerAdj, shooterPowerAdj))
     print("Motor: OFF")
 
 def pressX():
@@ -100,25 +102,21 @@ def pressY():
 
 def pressLB():
     #When pressed, decrease shooter speed range
-    global shooterRange
-    global shooterMin
-    if shooterRange <= 300:
+    global shooterPowerAdj
+    if shooterPowerAdj <= 0.3:
         print("range is minimized")
     else:
-        shooterRange -= 50
-        shooterMin = center - (shooterRange/2)
-        print("range decreased, new range = ", shooterRange/10)
+        shooterPowerAdj -= 0.05
+        print("range decreased, new shooterPowerAdj = ", shooterPowerAdj)
 
 def pressRB():
     #When pressed, increase shooter speed range
-    global shooterRange
-    global shooterMin
-    if shooterRange >= 1000:
+    global shooterPowerAdj
+    if shooterPowerAdj >= 0.9:
         print("range is maxed")
     else:
-        shooterRange += 50
-        shooterMin = center - (shooterRange/2)
-        print("range increased, new range = ", shooterRange/10)
+        shooterRange += 0.05
+        print("range increased, new shooterPowerAdj = ", shooterPowerAdj)
 
 def pressLT():
     #When pressed, speed range decreased for more accurate positioning
