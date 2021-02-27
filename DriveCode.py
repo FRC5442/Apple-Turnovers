@@ -116,12 +116,12 @@ def pressA():
 
 def pressB():
     #when pressed, load new ball
-    pwm.setServoPulse(shooterSingulation, 1300)
+    pwm.setServoPulse(shooterSingulation, 1200)
     print("pressed B, shooter loader moved")
 
 def releaseB():
     #When released, return singulation to normal
-    pwm.setServoPulse(shooterSingulation, 1500)
+    pwm.setServoPulse(shooterSingulation, 1700)
     print("B released, shooter loader moved")
 
 def pressX():
