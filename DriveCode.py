@@ -83,6 +83,10 @@ def enableHandlers():
     gamepad.addAxisMovedHandler("LEFT-Y", moveLeftY)
     gamepad.addAxisMovedHandler("RIGHT-Y", moveRightY)
 
+def enableGenearicHandlers():
+    gamepad.addButtonPressedHandler("START", pressSTART)
+    gamepad.addButtonPressedHandler("BACK", exitProc)
+
 
 
 '''---------------------------------
@@ -133,8 +137,7 @@ def pressSTART():
         controllerEnabled = False
         print("Pressed Y, Controller:    Disabled")
         gamepad.removeAllEventHandlers()
-        gamepad.addButtonPressedHandler("START", pressSTART)
-        gamepad.addButtonPressedHandler("BACK", exitProc)
+        enableGenearicHandlers()
         
     
 
@@ -225,24 +228,6 @@ def moveRightY(position):
 
 ---------------------------------'''
 
-gamepad.addButtonPressedHandler("START", pressSTART)
-gamepad.addButtonPressedHandler("BACK", exitProc)
+enableGenearicHandlers()
 enableHandlers()
 
-
-# gamepad.addButtonPressedHandler("A", pressA)
-# gamepad.addButtonPressedHandler("B", pressB)
-# gamepad.addButtonPressedHandler("X", pressX)
-
-# gamepad.addButtonPressedHandler("LB", pressLB)
-# gamepad.addButtonPressedHandler("RB", pressRB)
-# gamepad.addButtonPressedHandler("LT", pressLT)
-# gamepad.addButtonPressedHandler("RT", pressRT)
-
-# gamepad.addButtonReleasedHandler("LT", releaseLT)
-# gamepad.addButtonReleasedHandler("X", releaseX)
-
-
-
-# gamepad.addAxisMovedHandler("LEFT-Y", moveLeftY)
-# gamepad.addAxisMovedHandler("RIGHT-Y", moveRightY)
