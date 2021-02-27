@@ -146,10 +146,10 @@ def pressRT():
     #When pressed, change the head (switch the front of the robot)
     global reverseHead
     if reverseHead == False:
-        reverseHead == True
+        reverseHead = True
         print("Pressed RT: Head reversed = true")
     else:
-        reverseHead == False
+        reverseHead = False
         print("Pressed RT: Head reversed = false")
 
 
