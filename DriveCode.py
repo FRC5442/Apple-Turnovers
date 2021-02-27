@@ -1,8 +1,6 @@
 
 '''---------------------------------
 
-    Team A
-    
     Code Setup
 
 ---------------------------------'''
@@ -29,6 +27,9 @@ gamepad.startBackgroundUpdates()
     Define Variables
 
 ---------------------------------'''
+controllerEnabled = True  #Value to change when controller is being disabled
+
+reverseHead = False
 
 center = 1500
 shooterRange = 1000
@@ -96,8 +97,15 @@ def releaseX():
     print("Released X: Servo set to 0 deg")
 
 def pressY():
-    #When pressed, print pressed
-    print("Pressed Y")
+    #When pressed, disable controller
+    global controllerEnabled
+    if controllerEnabled == False:
+        controllerEnabled = True
+        print("Pressed Y, Controller:    Enabled")
+    else:
+        controllerEnabled = False
+        print("Pressed Y, Controller:    Disabled")
+    
 
 
 ###    Triggers
@@ -135,7 +143,12 @@ def releaseLT():
     print("Trigger released")
 
 def pressRT():
-    #When pressed, print pressed
+    #When pressed, change the head (switch the front of the robot)
+    global reverseHead
+    if reverseHead == False:
+        reverseHead == True
+    else:
+        reverseHead == False
     print("Pressed RT")
 
 
@@ -150,12 +163,22 @@ def pressRT():
 
 def moveLeftY(position):
     #Map the left y joystick value to the left motor PWM output
+
+    global reverseHead      #Check to see if head is reversed
+    if reverseHead == True:
+        position = -position        #Invert position values to change head
+    
     pwm.setServoPulse(leftMotor, remapDrive(-position, centerAdj, powerAdj))
     print("Left Motor", remapDrive(-position, centerAdj, powerAdj))
     print("Joystick Position: ", -position)
 
 def moveRightY(position):
     #Map the right y joystick value to the right motor PWM output
+
+    global reverseHead      #Check to see if head is reversed
+    if reverseHead == True:
+        position = -position        #Invert position values to change head
+
     pwm.setServoPulse(rightMotor, remapDrive(position, centerAdj, powerAdj))
     print("Right Motor", remapDrive(position, centerAdj, powerAdj))
     print("Joystick Position: ", position)
