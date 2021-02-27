@@ -83,7 +83,7 @@ def pressA():
     if shooterEnabled == False:
         #Turn shooter on if off
         pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, shooterPowerAdj))
-        print("Motor: ON   Output:", remapShooter(-1, centerAdj, shooterPowerAdj), "    Precentage:", shooterPowerAdj)
+        print("Motor: ON   Output:", remapShooter(-1, centerAdj, shooterPowerAdj), "    Precentage:", round(shooterPowerAdj, 2))
         shooterEnabled = True
     else:
         #Turn shooter off if on
