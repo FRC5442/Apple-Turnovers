@@ -30,6 +30,7 @@ gamepad.startBackgroundUpdates()
 controllerEnabled = True  #Value to change when controller is being disabled
 
 reverseHead = False
+shooterEnabled = False
 
 center = 1500
 shooterRange = 1000
@@ -78,13 +79,19 @@ def exitProc():
 
 def pressA():
     #when pressed, turn shooter motor on
-    pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, shooterPowerAdj))
-    print("Motor: ON   Output:", remapShooter(-1, centerAdj, shooterPowerAdj), "    Precentage:", shooterPowerAdj)
+    global shooterEnabled
+    if shooterEnabled == False:
+        pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, shooterPowerAdj))
+        print("Motor: ON   Output:", remapShooter(-1, centerAdj, shooterPowerAdj), "    Precentage:", shooterPowerAdj)
+        shooterEnabled = True
+    else:
+        pwm.setServoPulse(shooter, remapShooter(0, centerAdj, shooterPowerAdj))
+        print("Motor: OFF")
+        shooterEnabled = False
 
 def pressB():
     #when pressed, turn shooter motor off
-    pwm.setServoPulse(shooter, remapShooter(0, centerAdj, shooterPowerAdj))
-    print("Motor: OFF")
+    print("pressed B")
 
 def pressX():
     #when pressed, turn servo
