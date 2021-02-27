@@ -147,9 +147,10 @@ def pressRT():
     global reverseHead
     if reverseHead == False:
         reverseHead == True
+        print("Pressed RT: Head reversed = true")
     else:
         reverseHead == False
-    print("Pressed RT")
+        print("Pressed RT: Head reversed = false")
 
 
 
@@ -166,6 +167,7 @@ def moveLeftY(position):
 
     global reverseHead      #Check to see if head is reversed
     if reverseHead == True:
+        print("position reversed")
         position = -position        #Invert position values to change head
     
     pwm.setServoPulse(leftMotor, remapDrive(-position, centerAdj, powerAdj))
@@ -177,7 +179,8 @@ def moveRightY(position):
 
     global reverseHead      #Check to see if head is reversed
     if reverseHead == True:
-        position = -position        #Invert position values to change head
+        position = -position
+        print("position reversed")        #Invert position values to change head
 
     pwm.setServoPulse(rightMotor, remapDrive(position, centerAdj, powerAdj))
     print("Right Motor", remapDrive(position, centerAdj, powerAdj))
