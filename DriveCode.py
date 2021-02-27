@@ -45,6 +45,7 @@ leftMotor = 0
 rightMotor = 1
 shooter = 2
 pusherServo = 3
+shooterSingulation = 4
 
 
 '''---------------------------------
@@ -79,6 +80,7 @@ def enableHandlers():
 
     gamepad.addButtonReleasedHandler("LT", releaseLT)
     gamepad.addButtonReleasedHandler("X", releaseX)
+    gamepad.addButtonReleasedHandler("B", releaseB)
 
     gamepad.addAxisMovedHandler("LEFT-Y", moveLeftY)
     gamepad.addAxisMovedHandler("RIGHT-Y", moveRightY)
@@ -112,8 +114,14 @@ def pressA():
         shooterEnabled = False
 
 def pressB():
-    #when pressed, print pressed
-    print("pressed B")
+    #when pressed, load new ball
+    pwm.setServoPulse(shooterSingulation, 1300)
+    print("pressed B, shooter loader moved")
+
+def releaseB():
+    #When released, return singulation to normal
+    pwm.setServoPulse(shooterSingulation, 1500)
+    print("B released, shooter loader moved")
 
 def pressX():
     #when pressed, turn servo
