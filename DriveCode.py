@@ -171,7 +171,7 @@ def moveLeftY(position):
         position = -position        #Invert position values to change head
     
     pwm.setServoPulse(leftMotor, remapDrive(-position, centerAdj, powerAdj))
-    print("Left Motor", remapDrive(-position, centerAdj, powerAdj), "     Joystick Position: ", round(-position))
+    print("Left Motor", round(remapDrive(-position, centerAdj, powerAdj)), "     Joystick Position: ", round(-position))
 
 def moveRightY(position):
     #Map the right y joystick value to the right motor PWM output
@@ -182,7 +182,7 @@ def moveRightY(position):
         #print("position reversed")        #Invert position values to change head
 
     pwm.setServoPulse(rightMotor, remapDrive(position, centerAdj, powerAdj))
-    print("Right Motor", remapDrive(position, centerAdj, powerAdj), "     Joystick Position: ", round(position))
+    print("Right Motor", round(remapDrive(position, centerAdj, powerAdj)), "     Joystick Position: ", round(position))
 
 
 
