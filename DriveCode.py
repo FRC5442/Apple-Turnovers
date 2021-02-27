@@ -105,7 +105,7 @@ def releaseX():
     pwm.setServoPulse(pusherServo, 500)
     print("Released X: Servo set to 0 deg")
 
-def pressY():
+def pressSTART():
     #When pressed, disable controller
     global controllerEnabled
     if controllerEnabled == False:
@@ -231,7 +231,7 @@ def moveRightY(position):
 
 ---------------------------------'''
 
-gamepad.addButtonPressedHandler("Y", pressY)
+gamepad.addButtonPressedHandler("START", pressSTART)
 
 
 gamepad.addButtonPressedHandler("A", pressA)
