@@ -44,7 +44,7 @@ shooterPowerAdj = 0.5
 leftMotor = 0
 rightMotor = 1
 shooter = 2
-servo = 3
+pusherServo = 3
 
 
 '''---------------------------------
@@ -78,29 +78,31 @@ def exitProc():
 ###    Buttons
 
 def pressA():
-    #when pressed, turn shooter motor on
+    #when pressed, turn shooter motor on or off
     global shooterEnabled
     if shooterEnabled == False:
+        #Turn shooter on if off
         pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, shooterPowerAdj))
         print("Motor: ON   Output:", remapShooter(-1, centerAdj, shooterPowerAdj), "    Precentage:", shooterPowerAdj)
         shooterEnabled = True
     else:
+        #Turn shooter off if on
         pwm.setServoPulse(shooter, remapShooter(0, centerAdj, shooterPowerAdj))
         print("Motor: OFF")
         shooterEnabled = False
 
 def pressB():
-    #when pressed, turn shooter motor off
+    #when pressed, print pressed
     print("pressed B")
 
 def pressX():
     #when pressed, turn servo
-    pwm.setServoPulse(servo, 1500)
+    pwm.setServoPulse(pusherServo, 1500)
     print("Pressed X: Servo set to 90 deg")
 
 def releaseX():
     #when released, reset servo
-    pwm.setServoPulse(servo, 500)
+    pwm.setServoPulse(pusherServo, 500)
     print("Released X: Servo set to 0 deg")
 
 def pressY():
@@ -201,20 +203,23 @@ def moveRightY(position):
 
 ---------------------------------'''
 
-gamepad.addButtonPressedHandler("A", pressA)
-gamepad.addButtonPressedHandler("B", pressB)
-gamepad.addButtonPressedHandler("X", pressX)
 gamepad.addButtonPressedHandler("Y", pressY)
 
-gamepad.addButtonPressedHandler("LB", pressLB)
-gamepad.addButtonPressedHandler("RB", pressRB)
-gamepad.addButtonPressedHandler("LT", pressLT)
-gamepad.addButtonPressedHandler("RT", pressRT)
+if controllerEnabled == True:
+    gamepad.addButtonPressedHandler("A", pressA)
+    gamepad.addButtonPressedHandler("B", pressB)
+    gamepad.addButtonPressedHandler("X", pressX)
+    
 
-gamepad.addButtonReleasedHandler("LT", releaseLT)
-gamepad.addButtonReleasedHandler("X", releaseX)
+    gamepad.addButtonPressedHandler("LB", pressLB)
+    gamepad.addButtonPressedHandler("RB", pressRB)
+    gamepad.addButtonPressedHandler("LT", pressLT)
+    gamepad.addButtonPressedHandler("RT", pressRT)
 
-gamepad.addButtonPressedHandler("BACK", exitProc)
+    gamepad.addButtonReleasedHandler("LT", releaseLT)
+    gamepad.addButtonReleasedHandler("X", releaseX)
 
-gamepad.addAxisMovedHandler("LEFT-Y", moveLeftY)
-gamepad.addAxisMovedHandler("RIGHT-Y", moveRightY)
+    gamepad.addButtonPressedHandler("BACK", exitProc)
+
+    gamepad.addAxisMovedHandler("LEFT-Y", moveLeftY)
+    gamepad.addAxisMovedHandler("RIGHT-Y", moveRightY)
