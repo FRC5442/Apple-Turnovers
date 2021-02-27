@@ -126,7 +126,7 @@ def pressLB():
         print("range is minimized")
     else:
         shooterPowerAdj -= 0.05
-        print("range decreased, new shooterPowerAdj = ", shooterPowerAdj)
+        print("range decreased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
 
 def pressRB():
     #When pressed, increase shooter speed range
@@ -135,7 +135,7 @@ def pressRB():
         print("range is maxed")
     else:
         shooterPowerAdj += 0.05
-        print("range increased, new shooterPowerAdj = ", shooterPowerAdj)
+        print("range increased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
 
 def pressLT():
     #When pressed, speed range decreased for more accurate positioning
