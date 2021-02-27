@@ -44,8 +44,9 @@ shooterPowerAdj = 0.5
 leftMotor = 0
 rightMotor = 1
 shooter = 2
-pusherServo = 3
-shooterSingulation = 4
+shooterSingulation = 3
+pusherServo = 4
+
 
 
 '''---------------------------------
