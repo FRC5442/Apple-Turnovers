@@ -41,8 +41,8 @@ leftMotor = 0
 rightMotor = 1
 shooter = 2
 servo = 3
-servoLeft=5
-servoRight=6
+servoLeft=4
+servoRight=5
 
 
 '''---------------------------------
