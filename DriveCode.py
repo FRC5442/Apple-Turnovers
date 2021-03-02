@@ -148,8 +148,8 @@ def pressRT():
 
 def moveLeftY(position):
     #Map the left y joystick value to the left motor PWM output
-    pwm.setServoPulse(leftMotor, remapDrive(-position, centerAdj, powerAdj))
-    print("Left Motor", remapDrive(-position, centerAdj, powerAdj) - 80)
+    pwm.setServoPulse(leftMotor, remapDrive(-position, centerAdj, powerAdj) - 80)
+    print("Left Motor", remapDrive(-position, centerAdj, powerAdj))
     print("Joystick Position: ", -position)
 
 def moveRightY(position):
