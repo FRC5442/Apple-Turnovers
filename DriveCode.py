@@ -32,7 +32,7 @@ center = 1500
 shooterRange = 1000
 shooterMin = 1000
 
-centerAdj = 80 #Adjust center of pwm range for drive
+centerAdj = 50 #Adjust center of pwm range for drive
 powerAdj = 0.5 #Adjust limts of pwm range for drive (percentage)
 
 shooterPowerAdj = 0.5
