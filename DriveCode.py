@@ -87,8 +87,8 @@ def pressB():
 
 def pressX():
     #when pressed, turn servo
-    pwm.setServoPulse(servoLeft, 2100)
-    pwm.setServoPulse(servoRight, 900)
+    pwm.setServoPulse(servoLeft, 2200)
+    pwm.setServoPulse(servoRight, 800)
     print("Pressed X: Servo set to 90 deg")
 
 def releaseX():
