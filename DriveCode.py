@@ -75,8 +75,8 @@ def exitProc():
 
 def pressA():
     #when pressed, turn shooter motor on
-    pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, shooterPowerAdj))
-    print("Motor: ON   Output:", remapShooter(-1, centerAdj, shooterPowerAdj), "    Precentage:", shooterPowerAdj)
+    pwm.setServoPulse(shooter, remapShooter(1, centerAdj, shooterPowerAdj))
+    print("Motor: ON   Output:", remapShooter(1, centerAdj, shooterPowerAdj), "    Precentage:", shooterPowerAdj)
 
 def pressB():
     #when pressed, turn shooter motor off
