@@ -85,13 +85,13 @@ def pressB():
     pwm.setServoPulse(shooter, remapShooter(0, centerAdj, shooterPowerAdj))
     print("Motor: OFF")
 
-def pressX():
+def pressRT():
     #when pressed, turn servo
     pwm.setServoPulse(servoLeft, 2200)
     pwm.setServoPulse(servoRight, 800)
     print("Pressed X: Servo set to 90 deg")
 
-def releaseX():
+def releaseRT():
     #when released, reset servo
     pwm.setServoPulse(servoLeft, 1500)
     pwm.setServoPulse(servoRight, 1500)
@@ -136,9 +136,9 @@ def releaseLT():
     powerAdj = 0.5
     print("Trigger released")
 
-def pressRT():
+#def pressRT():
     #When pressed, print pressed
-    print("Pressed RT")
+#    print("Pressed RT")
 
 
 
@@ -174,16 +174,16 @@ def moveRightY(position):
 
 gamepad.addButtonPressedHandler("A", pressA)
 gamepad.addButtonPressedHandler("B", pressB)
-gamepad.addButtonPressedHandler("X", pressX)
+gamepad.addButtonPressedHandler("RT", pressRT)
 gamepad.addButtonPressedHandler("Y", pressY)
 
 gamepad.addButtonPressedHandler("LB", pressLB)
 gamepad.addButtonPressedHandler("RB", pressRB)
 gamepad.addButtonPressedHandler("LT", pressLT)
-gamepad.addButtonPressedHandler("RT", pressRT)
+#gamepad.addButtonPressedHandler("RT", pressRT)
 
 gamepad.addButtonReleasedHandler("LT", releaseLT)
-gamepad.addButtonReleasedHandler("X", releaseX)
+gamepad.addButtonReleasedHandler("RT", releaseRT)
 
 gamepad.addButtonPressedHandler("BACK", exitProc)
 
