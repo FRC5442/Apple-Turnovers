@@ -41,6 +41,8 @@ leftMotor = 0
 rightMotor = 1
 shooter = 2
 servo = 3
+servoLeft=4
+servoRight=5
 
 
 '''---------------------------------
@@ -85,12 +87,14 @@ def pressB():
 
 def pressX():
     #when pressed, turn servo
-    pwm.setServoPulse(servo, 1500)
+    pwm.setServoPulse(servoLeft, 1500)
+    pwm.setServoPulse(servoRight, 1500)
     print("Pressed X: Servo set to 90 deg")
 
 def releaseX():
     #when released, reset servo
-    pwm.setServoPulse(servo, 500)
+    pwm.setServoPulse(servoLeft, 1500)
+    pwm.setServoPulse(servoRight, 1500)
     print("Released X: Servo set to 0 deg")
 
 def pressY():
