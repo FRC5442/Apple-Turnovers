@@ -116,7 +116,7 @@ def enableHandlers():
 
     gamepad.addAxisMovedHandler("LEFT-Y", moveLeftY)
     gamepad.addAxisMovedHandler("RIGHT-Y", moveRightY)
-    gamepad.addAxisMovedHandler("DPAD-Y", moveStraight)
+    #gamepad.addAxisMovedHandler("DPAD-Y", moveStraight)
 
 def enableGenearicHandlers():
     gamepad.addButtonPressedHandler("START", pressSTART)
