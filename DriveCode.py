@@ -197,11 +197,16 @@ def pressSTART():
 def pressLB():
     #When pressed, decrease shooter speed range
     global shooterPowerAdj
+    global shooterEnabled
     if shooterPowerAdj <= 0.3:
         print("range is minimized")
     else:
         shooterPowerAdj -= 0.05
         print("range decreased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
+    
+    if shooterEnabled == True:
+        pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, shooterPowerAdj))
+        print("Motor: ON   Output:", remapShooter(-1, centerAdj, shooterPowerAdj), "    Precentage:", round(shooterPowerAdj, 2))
 
 def pressRB():
     #When pressed, increase shooter speed range
@@ -211,6 +216,10 @@ def pressRB():
     else:
         shooterPowerAdj += 0.05
         print("range increased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
+
+    if shooterEnabled == True:
+        pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, shooterPowerAdj))
+        print("Motor: ON   Output:", remapShooter(-1, centerAdj, shooterPowerAdj), "    Precentage:", round(shooterPowerAdj, 2))
 
 def pressLT():
     #When pressed, speed range decreased for more accurate positioning
