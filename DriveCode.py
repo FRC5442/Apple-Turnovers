@@ -47,7 +47,14 @@ leftMotor = 0
 rightMotor = 1
 shooter = 2
 shooterSingulation = 3
-pusherServo = 4
+servo2 = 4
+
+
+servoLoaderPositionEngaged = 110
+servoLoaderPositionRest = 70
+
+servo2PositionEngaged = 0
+servo2PositionRest = 90
 
 
 
@@ -56,6 +63,19 @@ pusherServo = 4
     Generic Methods
 
 ---------------------------------'''
+
+def remapServoPosition(oldValue):
+    oldMin = 0
+    oldMax = 180
+    oldRange = oldMax - oldMin
+
+    newMin = 500
+    newMax = 2500
+    newRange = newMax - newMin
+
+    value = (((oldValue - oldMin) * newRange) / oldRange) + newMin
+    return value
+
 
 def remapShooter(rawInput, cntAdj, pwrAdj):
     #Method to remap shooter motor PWM value
@@ -116,25 +136,32 @@ def pressA():
         print("Motor: OFF")
         shooterEnabled = False
 
+
 def pressB():
     #when pressed, load new ball
-    pwm.setServoPulse(shooterSingulation, 1200)
-    print("pressed B, shooter loader moved")
+    global servoLoaderPositionEngaged
+    pwm.setServoPulse(shooterSingulation, remapServoPosition(servoLoaderPositionEngaged))
+    print("pressed B, shooter loader moved to:", servoLoaderPositionEngaged)
 
 def releaseB():
     #When released, return singulation to normal
-    pwm.setServoPulse(shooterSingulation, 1700)
-    print("B released, shooter loader moved")
+    global servoLoaderPositionRest
+    pwm.setServoPulse(shooterSingulation, remapServoPosition(servoLoaderPositionRest))
+    print("B released, shooter loader moved to: ", servoLoaderPositionRest)
+
 
 def pressX():
     #when pressed, turn servo
-    pwm.setServoPulse(pusherServo, 1500)
-    print("Pressed X: Servo set to 90 deg")
+    global servo2PositionEngaged
+    pwm.setServoPulse(servo2, remapServoPosition(servo2PositionEngaged))
+    print("Pressed X: Servo set to: ", servo2PositionEngaged)
 
 def releaseX():
     #when released, reset servo
-    pwm.setServoPulse(pusherServo, 500)
-    print("Released X: Servo set to 0 deg")
+    global servo2PositionRest
+    pwm.setServoPulse(servo2, remapServoPosition(servo2PositionRest))
+    print("Released X: Servo set to: ", servo2PositionRest)
+
 
 def pressSTART():
     #When pressed, disable controller
