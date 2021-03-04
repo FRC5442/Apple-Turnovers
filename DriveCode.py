@@ -7,13 +7,19 @@
 
 ---------------------------------'''
 
-import sys
 from PCA9685 import PCA9685
 import Gamepad
-import time
+import RPi.GPIO as GPIO
+
+
 
 pwm = PCA9685(0x40)
 pwm.setPWMFreq(50)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+
 
 if Gamepad.available():
     gamepad = Gamepad.smx()
@@ -29,7 +35,7 @@ gamepad.startBackgroundUpdates()
     Define Variables
 
 ---------------------------------'''
-controllerEnabled = True  #Value to change when controller is being disabled
+controllerEnabled = False  #Value to change when controller is being disabled
 
 reverseHead = False
 shooterEnabled = False
@@ -56,7 +62,10 @@ servoLoaderPositionRest = 70
 servo2PositionEngaged = 0
 servo2PositionRest = 90
 
+enableLED = 18
 
+
+GPIO.setup(enableLED, GPIO.OUT)
 
 '''---------------------------------
 
@@ -169,11 +178,13 @@ def pressSTART():
     if controllerEnabled == False:
         controllerEnabled = True
         print("Pressed Y, Controller:    Enabled")
+        GPIO.output(enableLED, GPIO.HIGH)
         enableHandlers()
 
     else:
         controllerEnabled = False
         print("Pressed Y, Controller:    Disabled")
+        GPIO.output(enableLED, GPIO.LOW)
         gamepad.removeAllEventHandlers()
         enableGenearicHandlers()
         
@@ -270,6 +281,6 @@ def moveRightY(position):
 
 ---------------------------------'''
 
+gamepad.removeAllEventHandlers()
 enableGenearicHandlers()
-enableHandlers()
 
