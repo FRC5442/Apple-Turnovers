@@ -116,7 +116,7 @@ def enableHandlers():
 
     gamepad.addAxisMovedHandler("LEFT-Y", moveLeftY)
     gamepad.addAxisMovedHandler("RIGHT-Y", moveRightY)
-    #gamepad.addAxisMovedHandler("DPAD-Y", moveStraight)
+    gamepad.addAxisMovedHandler("DPAD-Y", moveStraight)
 
 def enableGenearicHandlers():
     gamepad.addButtonPressedHandler("START", pressSTART)
@@ -272,9 +272,8 @@ def moveRightY(position):
         pwm.setServoPulse(rightMotor, remapDrive(position, centerAdj, powerAdj))
         print("Right Motor", round(remapDrive(position, centerAdj, powerAdj)), "     Joystick Position: ", round(position, 3))
 
-def moveStraight():
+def moveStraight(position):
     global reverseHead
-    position = 0.5
     if reverseHead == True:
         pwm.setServoPulse(leftMotor, remapDrive(position, centerAdj, powerAdj))
         pwm.setServoPulse(rightMotor, remapDrive(-position, centerAdj, powerAdj))
