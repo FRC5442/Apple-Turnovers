@@ -51,15 +51,15 @@ servo2PositionRest = 90         #The rest position for servo 2
 
 enableLED = 18                  #Pin to connect the enable LED to
 
-DRIVE_POWER = 0.7               #Adjust limts of pwm range for drive (percentage)
+DRIVE_POWER = 0.8               #Adjust limts of pwm range for drive (percentage)
 SLOW_DRIVE_POWER = .25          #Adjust for limit on pwm range for drive when moving slower (precentage)
 centerAdj = 80                  #Adjust center of pwm range for drive
 
 SHOOTER_STANDARD_CHANGE = 0.05      #Adjust for shooter speed increments
 SHOOTER_SMALL_CHANGE = 0.02          #Adjust for smaller shooter speed increments
 
-SHOOTER_MIN = 0.3
-SHOOTER_MAX = 0.8
+SHOOTER_MIN = 0.2
+SHOOTER_MAX = 0.95
 
 
 ###     Other
