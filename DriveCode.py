@@ -156,7 +156,7 @@ def pressY():
     global testServoZeroed
 
     if not testServoZeroed:
-        pwm.setServoPulse(servoTest, remapServoPosition(0))
+        pwm.setServoPulse(servoTest, remapServoPosition(180))
         testServoZeroed = True
     else:
         pwm.setServoPulse(servoTest, remapServoPosition(90))
