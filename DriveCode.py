@@ -55,6 +55,8 @@ DRIVE_POWER = 0.7               #Adjust limts of pwm range for drive (percentage
 SLOW_DRIVE_POWER = .25          #Adjust for limit on pwm range for drive when moving slower (precentage)
 centerAdj = 80                  #Adjust center of pwm range for drive
 
+SHOOTER_SPEED_CHANGE = .05      #Adjust for shooter speed increments
+
 
 ###     Other
 
@@ -208,10 +210,11 @@ def pressLB():
     #When pressed, decrease shooter speed range
     global shooterPowerAdj
     global shooterEnabled
+    global SHOOTER_SPEED_CHANGE
     if shooterPowerAdj <= 0.3:
         print("range is minimized")
     else:
-        shooterPowerAdj -= 0.05
+        shooterPowerAdj -= SHOOTER_SPEED_CHANGE
         print("range decreased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
     
     if shooterEnabled == True:
@@ -221,10 +224,12 @@ def pressLB():
 def pressRB():
     #When pressed, increase shooter speed range
     global shooterPowerAdj
+    global shooterEnabled
+    global SHOOTER_SPEED_CHANGE
     if shooterPowerAdj >= 0.9:
         print("range is maxed")
     else:
-        shooterPowerAdj += 0.05
+        shooterPowerAdj += SHOOTER_SPEED_CHANGE
         print("range increased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
 
     if shooterEnabled == True:
