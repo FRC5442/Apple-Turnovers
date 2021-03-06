@@ -17,6 +17,7 @@ if Gamepad.available():
     gamepad = Gamepad.smx()
 else:
     print("Controller not connected")
+    sys.exit(1)
 
 gamepad.startBackgroundUpdates()
 
