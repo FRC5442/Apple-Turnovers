@@ -141,7 +141,7 @@ def pressB():
     #when pressed, drop fence or raise fence
     global fenceUp
 
-    if not fenceUp:
+    if fenceUp:
         pwm.setServoPulse(fenceLeft, remapServoPosition(180))
         pwm.setServoPulse(fenceRight, remapServoPosition(0))
         fenceUp = False
