@@ -89,7 +89,7 @@ def remapDrive(rawInput, centAdj, pwrAdj):
 def exitProc():
     #method to disconnect controller and end program
     print("---Controller Disconnected---")
-    GPIO.Output(enableLED, GPIO.LOW)    
+    GPIO.output(enableLED, GPIO.LOW)    
     gamepad.disconnect()
 
 def enableHandlers():
