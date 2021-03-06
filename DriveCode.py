@@ -35,6 +35,9 @@ controllerEnabled = False
 reverseHead = False
 shooterEnabled = False
 
+sideServoZeroed = False
+testServoZeroed = False
+
 center = 1500
 shooterRange = 1000
 shooterMin = 1000
@@ -93,6 +96,7 @@ def enableHandlers():
     gamepad.addButtonPressedHandler("A", pressA)
     gamepad.addButtonPressedHandler("B", pressB)
     #gamepad.addButtonPressedHandler("X", pressX)
+    gamepad.addButtonPressedHandler("Y", pressY)
 
     gamepad.addButtonPressedHandler("LB", pressLB)
     gamepad.addButtonPressedHandler("RB", pressRB)
@@ -135,13 +139,22 @@ def pressA():
 
 def pressB():
     #when pressed, print pressed
-    pwm.setServoPulse(servoLeft, remapServoPosition(0))
-    pwm.setServoPulse(servoRight, remapServoPosition(0))
+    if not sideServoZeroed:
+        pwm.setServoPulse(servoLeft, remapServoPosition(0))
+        pwm.setServoPulse(servoRight, remapServoPosition(0))
+        sideServoZeroed = True
+    else:
+        pwm.setServoPulse(servoLeft, remapServoPosition(90))
+        pwm.setServoPulse(servoRight, remapServoPosition(90))
     print("Pressed B")
 
 def pressY():
     #When pressed, print pressed
-    pwm.setServoPulse(servoTest, remapServoPosition(0))
+    if not testServoZeroed:
+        pwm.setServoPulse(servoTest, remapServoPosition(0))
+        testServoZeroed = True
+    else:
+        pwm.setServoPulse(servoTest, remapServoPosition(90))
     print("Pressed Y")
 
 def pressSTART():
