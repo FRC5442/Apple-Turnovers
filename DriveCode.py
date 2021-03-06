@@ -43,40 +43,32 @@ shooter = 2
 shooterSingulation = 3
 servo2 = 4
 
-servoLoaderPositionEngaged = 110
-servoLoaderPositionRest = 70
+servoLoaderPositionEngaged = 110       #the engaged position for the loader
+servoLoaderPositionRest = 70            #The rest position for the loader
 
-servo2PositionEngaged = 0
-servo2PositionRest = 90
+servo2PositionEngaged = 0       #the engaged position for servo 2
+servo2PositionRest = 90         #The rest position for servo 2
 
-enableLED = 18
+enableLED = 18                  #Pin to connect the enable LED to
 
-center = 1500
-shooterRange = 1000
-shooterMin = 1000
-
-DRIVE_POWER = 0.7  #Adjust limts of pwm range for drive (percentage)
-centerAdj = 80 #Adjust center of pwm range for drive
+DRIVE_POWER = 0.7               #Adjust limts of pwm range for drive (percentage)
+SLOW_DRIVE_POWER = .25          #Adjust for limit on pwm range for drive when moving slower (precentage)
+centerAdj = 80                  #Adjust center of pwm range for drive
 
 
 ###     Other
 
-controllerEnabled = False  #Value to change when controller is being disabled
+controllerEnabled = False   #Value to change when controller is being disabled
 
-reverseHead = False
-shooterEnabled = False
+reverseHead = False         #Boolean value to determine head reversed
+shooterEnabled = False      #Boolean value to determine shooter enabled
 
-powerAdj = DRIVE_POWER 
+powerAdj = DRIVE_POWER      #setting changable powerAdj to 
 
-shooterPowerAdj = 0.5
-
-
+shooterPowerAdj = 0.5       #Default power precentage for shooter motor
 
 
-
-
-
-GPIO.setup(enableLED, GPIO.OUT)
+GPIO.setup(enableLED, GPIO.OUT)     #Setting up enable LED for output
 
 '''---------------------------------
 
@@ -85,6 +77,7 @@ GPIO.setup(enableLED, GPIO.OUT)
 ---------------------------------'''
 
 def remapServoPosition(oldValue):
+    #Method to remap input of 0 to 180 degrees to output of PWM range for servo positioning
     oldMin = 0
     oldMax = 180
     oldRange = oldMax - oldMin
@@ -103,15 +96,18 @@ def remapShooter(rawInput, cntAdj, pwrAdj):
     return value
 
 def remapDrive(rawInput, centAdj, pwrAdj):
+    #Method to remap drive motors to PWM values
     value = 1500 + centAdj + (500 * pwrAdj * rawInput)
     return value
 
 def exitProc():
-    #method to disconnect controller and end program
+    #Method to disconnect controller and end program
     print("---Controller Disconnected---")
     gamepad.disconnect()
 
 def enableHandlers():
+    #Method to standardize enabling event handlers
+    #Add all event handlers here
     gamepad.addButtonPressedHandler("A", pressA)
     gamepad.addButtonPressedHandler("B", pressB)
     gamepad.addButtonPressedHandler("X", pressX)
@@ -130,6 +126,8 @@ def enableHandlers():
     gamepad.addAxisMovedHandler("DPAD-Y", moveStraight)
 
 def enableGenearicHandlers():
+    #Method to enable necessary event handlers
+    #Add all necessary event handlers here
     gamepad.addButtonPressedHandler("START", pressSTART)
     gamepad.addButtonPressedHandler("BACK", exitProc)
 
@@ -185,7 +183,7 @@ def releaseX():
 
 
 def pressSTART():
-    #When pressed, disable controller
+    #When pressed, toggle controller enabled
     global controllerEnabled
     if controllerEnabled == False:
         controllerEnabled = True
@@ -202,8 +200,9 @@ def pressSTART():
         
     
 
-
+###
 ###    Triggers
+###
 
 def pressLB():
     #When pressed, decrease shooter speed range
@@ -235,8 +234,9 @@ def pressRB():
 def pressLT():
     #When pressed, speed range decreased for more accurate positioning
     global powerAdj
+    global SLOW_DRIVE_POWER
 
-    powerAdj = 0.25
+    powerAdj = SLOW_DRIVE_POWER
     print("Trigger pressed")
 
 def releaseLT():
