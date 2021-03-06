@@ -142,7 +142,7 @@ def pressB():
     global sideServoZeroed
 
     if not sideServoZeroed:
-        pwm.setServoPulse(servoLeft, remapServoPosition(0))
+        pwm.setServoPulse(servoLeft, remapServoPosition(180))
         pwm.setServoPulse(servoRight, remapServoPosition(0))
         sideServoZeroed = True
     else:
