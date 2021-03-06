@@ -47,9 +47,9 @@ shooterPowerAdj = 0.5
 leftMotor = 0
 rightMotor = 1
 shooter = 2
-servo = 3
-servoLeft=4
-servoRight=5
+servoTest = 3
+servoLeft = 4
+servoRight = 5
 
 enableLED = 18
 
@@ -135,10 +135,13 @@ def pressA():
 
 def pressB():
     #when pressed, print pressed
+    pwm.setServoPulse(servoLeft, remapServoPosition(0))
+    pwm.setServoPulse(servoRight, remapServoPosition(0))
     print("Pressed B")
 
 def pressY():
     #When pressed, print pressed
+    pwm.setServoPulse(servoTest, remapServoPosition(0))
     print("Pressed Y")
 
 def pressSTART():
