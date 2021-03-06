@@ -93,8 +93,8 @@ def exitProc():
     gamepad.disconnect()
 
 def enableHandlers():
-    #gamepad.addButtonPressedHandler("A", pressA)
-    #gamepad.addButtonPressedHandler("B", pressB)
+    #gamepad.addButtonPressedHandler("A", toggleShooter)
+    gamepad.addButtonPressedHandler("B", toggleShooter)
     #gamepad.addButtonPressedHandler("X", pressX)
     gamepad.addButtonPressedHandler("Y", toggleManip)
 
