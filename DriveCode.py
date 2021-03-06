@@ -149,12 +149,12 @@ def pressB():
         pwm.setServoPulse(fenceLeft, remapServoPosition(180))
         pwm.setServoPulse(fenceRight, remapServoPosition(0))
         fenceUp = False
-    print("Pressed B, Fence State: ", fenceUp)
+    print("Pressed B, Fence State: ", not fenceUp)
 
 def pressY():
     #When pressed, print pressed
     pwm.setServoPulse(manip, remapServoPosition(25))
-    time.sleep(1)
+    time.sleep(0.5)
     pwm.setServoPulse(manip, remapServoPosition(180))
     print("Pressed Y")
 
