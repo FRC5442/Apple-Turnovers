@@ -336,12 +336,12 @@ def moveRightY(position):
 def moveStraight(position):
     global reverseHead
     if reverseHead == True:
-        pwm.setServoPulse(leftMotor, remapDrive(position, centerAdj, powerAdj))
-        pwm.setServoPulse(rightMotor, remapDrive(-position, centerAdj, powerAdj))
+        pwm.setServoPulse(leftMotor, remapDrive(position, centerAdj, .25))
+        pwm.setServoPulse(rightMotor, remapDrive(-position, centerAdj, .25))
         print("Moving straight")
     else:
-        pwm.setServoPulse(leftMotor, remapDrive(-position, centerAdj, powerAdj))
-        pwm.setServoPulse(rightMotor, remapDrive(position, centerAdj, powerAdj))
+        pwm.setServoPulse(leftMotor, remapDrive(-position, centerAdj, .25))
+        pwm.setServoPulse(rightMotor, remapDrive(position, centerAdj, .25))
         print("Moving straight")
 
 
