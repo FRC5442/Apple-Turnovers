@@ -9,6 +9,7 @@ import sys
 from PCA9685 import PCA9685
 import Gamepad
 import RPi.GPIO as GPIO
+import time
 
 pwm = PCA9685(0x40)
 pwm.setPWMFreq(50)
@@ -143,16 +144,17 @@ def pressB():
     if not fenceUp:
         pwm.setServoPulse(fenceLeft, remapServoPosition(180))
         pwm.setServoPulse(fenceRight, remapServoPosition(0))
-        fenceUp = True
+        fenceUp = False
     else:
         pwm.setServoPulse(fenceLeft, remapServoPosition(135))
         pwm.setServoPulse(fenceRight, remapServoPosition(45))
-        fenceUp = False
+        fenceUp = True
     print("Pressed B")
 
 def pressY():
     #When pressed, print pressed
     pwm.setServoPulse(manip, remapServoPosition(25))
+    time.sleep(1)
     pwm.setServoPulse(manip, remapServoPosition(180))
     print("Pressed Y")
 
