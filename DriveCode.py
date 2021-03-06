@@ -35,26 +35,13 @@ gamepad.startBackgroundUpdates()
     Define Variables
 
 ---------------------------------'''
-controllerEnabled = False  #Value to change when controller is being disabled
-
-reverseHead = False
-shooterEnabled = False
-
-center = 1500
-shooterRange = 1000
-shooterMin = 1000
-
-centerAdj = 80 #Adjust center of pwm range for drive
-powerAdj = 0.7 #Adjust limts of pwm range for drive (percentage)
-
-shooterPowerAdj = 0.5
+###     Constants
 
 leftMotor = 0
 rightMotor = 1
 shooter = 2
 shooterSingulation = 3
 servo2 = 4
-
 
 servoLoaderPositionEngaged = 110
 servoLoaderPositionRest = 70
@@ -63,6 +50,30 @@ servo2PositionEngaged = 0
 servo2PositionRest = 90
 
 enableLED = 18
+
+center = 1500
+shooterRange = 1000
+shooterMin = 1000
+
+DRIVE_POWER = 0.7  #Adjust limts of pwm range for drive (percentage)
+centerAdj = 80 #Adjust center of pwm range for drive
+
+
+###     Other
+
+controllerEnabled = False  #Value to change when controller is being disabled
+
+reverseHead = False
+shooterEnabled = False
+
+powerAdj = DRIVE_POWER 
+
+shooterPowerAdj = 0.5
+
+
+
+
+
 
 
 GPIO.setup(enableLED, GPIO.OUT)
@@ -231,8 +242,9 @@ def pressLT():
 def releaseLT():
     #When released, speed range returned to normal
     global powerAdj
+    global DRIVE_POWER
 
-    powerAdj = 0.5
+    powerAdj = DRIVE_POWER
     print("Trigger released")
 
 def pressRT():
