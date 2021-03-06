@@ -93,26 +93,24 @@ def exitProc():
     gamepad.disconnect()
 
 def enableHandlers():
-    gamepad.addButtonPressedHandler("A", pressA)
-    gamepad.addButtonPressedHandler("B", pressB)
+    #gamepad.addButtonPressedHandler("A", pressA)
+    #gamepad.addButtonPressedHandler("B", pressB)
     #gamepad.addButtonPressedHandler("X", pressX)
-    gamepad.addButtonPressedHandler("Y", pressY)
+    gamepad.addButtonPressedHandler("Y", toggleManip)
 
-    gamepad.addButtonPressedHandler("LB", pressLB)
-    gamepad.addButtonPressedHandler("RB", pressRB)
-    gamepad.addButtonPressedHandler("LT", pressLT)
-    gamepad.addButtonPressedHandler("RT", pressRT)
+    gamepad.addButtonPressedHandler("LB", decreaseShooter)
+    gamepad.addButtonPressedHandler("RB", increaseShooter)
+    gamepad.addButtonPressedHandler("LT", toggleFence)
+    gamepad.addButtonPressedHandler("RT", limitDrive)
 
-    gamepad.addButtonReleasedHandler("LT", releaseLT)
-    #gamepad.addButtonReleasedHandler("X", releaseX)
-    #gamepad.addButtonReleasedHandler("B", releaseB)
+    gamepad.addButtonReleasedHandler("RT", unlimitDrive)
 
     gamepad.addAxisMovedHandler("LEFT-Y", moveLeftY)
     gamepad.addAxisMovedHandler("RIGHT-Y", moveRightY)
     gamepad.addAxisMovedHandler("DPAD-Y", moveStraight)
 
 def enableGenearicHandlers():
-    gamepad.addButtonPressedHandler("START", pressSTART)
+    gamepad.addButtonPressedHandler("START", toggleEnable)
     gamepad.addButtonPressedHandler("BACK", exitProc)
 
 
@@ -124,7 +122,7 @@ def enableGenearicHandlers():
 
 ###    Buttons
 
-def pressA():
+def toggleShooter():
     #when pressed, turn shooter motor on
     global shooterEnabled
 
@@ -137,7 +135,7 @@ def pressA():
         print("Shooter: OFF")
         shooterEnabled = False
 
-def pressB():
+def toggleFence():
     #when pressed, drop fence or raise fence
     global fenceUp
 
@@ -151,14 +149,14 @@ def pressB():
         fenceUp = False
     print("Pressed B, Fence State: ", not fenceUp)
 
-def pressY():
+def toggleManip():
     #When pressed, print pressed
     pwm.setServoPulse(manip, remapServoPosition(25))
     time.sleep(0.5)
     pwm.setServoPulse(manip, remapServoPosition(180))
     print("Pressed Y")
 
-def pressSTART():
+def toggleEnable():
     #When pressed, toggle disable controller
     global controllerEnabled
     if controllerEnabled == False:
@@ -174,22 +172,7 @@ def pressSTART():
         gamepad.removeAllEventHandlers()
         enableGenearicHandlers()
 
-###     Triggers
-
-def pressRT():
-    #when pressed, turn servo
-    pwm.setServoPulse(servoLeft, 2200)
-    pwm.setServoPulse(servoRight, 800)
-    print("Pressed X: Servo set to 90 deg")
-
-def releaseRT():
-    #when released, reset servo
-    pwm.setServoPulse(servoLeft, 1500)
-    pwm.setServoPulse(servoRight, 1500)
-    print("Released X: Servo set to 0 deg")
-
-
-def pressLB():
+def decreaseShooter():
     #When pressed, decrease shooter speed range
     global shooterPowerAdj
     global shooterEnabled
@@ -203,7 +186,7 @@ def pressLB():
         pwm.setServoPulse(shooter, remapShooter(1, centerAdj, shooterPowerAdj))
         print("Shooter speed DECREASED. New Speed: ", remapShooter(1, centerAdj, shooterPowerAdj))
 
-def pressRB():
+def increaseShooter():
     #When pressed, increase shooter speed range
     global shooterPowerAdj
     if shooterPowerAdj >= 0.9:
@@ -216,21 +199,21 @@ def pressRB():
         pwm.setServoPulse(shooter, remapShooter(1, centerAdj, shooterPowerAdj))
         print("Shooter speed INCREASED. New Speed: ", remapShooter(1, centerAdj, shooterPowerAdj))
 
-def pressLT():
+def limitDrive():
     #When pressed, speed range decreased for more accurate positioning
     global powerAdj
 
     powerAdj = 0.25
     print("Trigger pressed")
 
-def releaseLT():
+def unlimitDrive():
     #When released, speed range returned to normal
     global powerAdj
 
     powerAdj = 0.5
     print("Trigger released")
 
-def pressRT():
+def switchHead():
     #When pressed, toggle head reverse
     global reverseHead
     if reverseHead == False:
