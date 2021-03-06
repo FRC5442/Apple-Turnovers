@@ -142,12 +142,12 @@ def pressB():
     global fenceUp
 
     if not fenceUp:
-        pwm.setServoPulse(fenceLeft, remapServoPosition(115))
-        pwm.setServoPulse(fenceRight, remapServoPosition(65))
+        pwm.setServoPulse(fenceLeft, remapServoPosition(65))
+        pwm.setServoPulse(fenceRight, remapServoPosition(115))
         fenceUp = True
     else:
-        pwm.setServoPulse(fenceLeft, remapServoPosition(180))
-        pwm.setServoPulse(fenceRight, remapServoPosition(0))
+        pwm.setServoPulse(fenceLeft, remapServoPosition(0))
+        pwm.setServoPulse(fenceRight, remapServoPosition(180))
         fenceUp = False
     print("Pressed B, Fence State: ", not fenceUp)
 
