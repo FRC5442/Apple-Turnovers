@@ -35,8 +35,7 @@ controllerEnabled = False
 reverseHead = False
 shooterEnabled = False
 
-sideServoZeroed = False
-testServoZeroed = False
+fenceUp = True
 
 center = 1500
 shooterRange = 1000
@@ -50,9 +49,9 @@ shooterPowerAdj = 0.5
 leftMotor = 0
 rightMotor = 1
 shooter = 2
-servoTest = 3
-servoLeft = 4
-servoRight = 5
+manip = 3
+fenceLeft = 4
+fenceRight = 5
 
 enableLED = 18
 
@@ -138,29 +137,23 @@ def pressA():
         shooterEnabled = False
 
 def pressB():
-    #when pressed, print pressed
-    global sideServoZeroed
+    #when pressed, drop fence or raise fence
+    global fenceUp
 
-    if not sideServoZeroed:
-        pwm.setServoPulse(servoLeft, remapServoPosition(180))
-        pwm.setServoPulse(servoRight, remapServoPosition(0))
-        sideServoZeroed = True
+    if not fenceUp:
+        pwm.setServoPulse(fenceLeft, remapServoPosition(180))
+        pwm.setServoPulse(fenceRight, remapServoPosition(0))
+        fenceUp = True
     else:
-        pwm.setServoPulse(servoLeft, remapServoPosition(90))
-        pwm.setServoPulse(servoRight, remapServoPosition(90))
-        sideServoZeroed = False
+        pwm.setServoPulse(fenceLeft, remapServoPosition(135))
+        pwm.setServoPulse(fenceRight, remapServoPosition(45))
+        fenceUp = False
     print("Pressed B")
 
 def pressY():
     #When pressed, print pressed
-    global testServoZeroed
-
-    if not testServoZeroed:
-        pwm.setServoPulse(servoTest, remapServoPosition(180))
-        testServoZeroed = True
-    else:
-        pwm.setServoPulse(servoTest, remapServoPosition(90))
-        testServoZeroed = False
+    pwm.setServoPulse(manip, remapServoPosition(25))
+    pwm.setServoPulse(manip, remapServoPosition(180))
     print("Pressed Y")
 
 def pressSTART():
