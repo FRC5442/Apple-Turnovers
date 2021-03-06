@@ -55,7 +55,11 @@ DRIVE_POWER = 0.7               #Adjust limts of pwm range for drive (percentage
 SLOW_DRIVE_POWER = .25          #Adjust for limit on pwm range for drive when moving slower (precentage)
 centerAdj = 80                  #Adjust center of pwm range for drive
 
-SHOOTER_SPEED_CHANGE = .05      #Adjust for shooter speed increments
+SHOOTER_STANDARD_CHANGE = 0.05      #Adjust for shooter speed increments
+SHOOTER_SMALL_CHANGE = 0.02          #Adjust for smaller shooter speed increments
+
+SHOOTER_MIN = 0.3
+SHOOTER_MAX = 0.8
 
 
 ###     Other
@@ -64,9 +68,10 @@ controllerEnabled = False   #Value to change when controller is being disabled
 
 reverseHead = False         #Boolean value to determine head reversed
 shooterEnabled = False      #Boolean value to determine shooter enabled
+yHeld = False               #Boolean value to determine if y is held
+
 
 powerAdj = DRIVE_POWER      #setting changable powerAdj to 
-
 shooterPowerAdj = 0.5       #Default power precentage for shooter motor
 
 
@@ -113,6 +118,7 @@ def enableHandlers():
     gamepad.addButtonPressedHandler("A", pressA)
     gamepad.addButtonPressedHandler("B", pressB)
     gamepad.addButtonPressedHandler("X", pressX)
+    gamepad.addButtonPressedHandler("Y", pressY)
 
     gamepad.addButtonPressedHandler("LB", pressLB)
     gamepad.addButtonPressedHandler("RB", pressRB)
@@ -122,6 +128,7 @@ def enableHandlers():
     gamepad.addButtonReleasedHandler("LT", releaseLT)
     gamepad.addButtonReleasedHandler("X", releaseX)
     gamepad.addButtonReleasedHandler("B", releaseB)
+    gamepad.addButtonReleasedHandler("Y", releaseY)
 
     gamepad.addAxisMovedHandler("LEFT-Y", moveLeftY)
     gamepad.addAxisMovedHandler("RIGHT-Y", moveRightY)
@@ -183,6 +190,14 @@ def releaseX():
     pwm.setServoPulse(servo2, remapServoPosition(servo2PositionRest))
     print("Released X: Servo set to: ", servo2PositionRest)
 
+def pressY():
+    global yHeld
+    yHeld = True
+def releaseY():
+    global yHeld
+    yHeld = False
+
+
 
 def pressSTART():
     #When pressed, toggle controller enabled
@@ -210,12 +225,22 @@ def pressLB():
     #When pressed, decrease shooter speed range
     global shooterPowerAdj
     global shooterEnabled
-    global SHOOTER_SPEED_CHANGE
-    if shooterPowerAdj <= 0.3:
-        print("range is minimized")
+    global SHOOTER_STANDARD_CHANGE
+    global yHeld
+    global SHOOTER_MIN
+
+    if yHeld == True:
+        if shooterPowerAdj <= SHOOTER_MIN:
+            print("range is minimized")
+        else:
+            shooterPowerAdj -= SHOOTER_SMALL_CHANGE
+            print("range decreased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
     else:
-        shooterPowerAdj -= SHOOTER_SPEED_CHANGE
-        print("range decreased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
+        if shooterPowerAdj <= SHOOTER_MIN:
+            print("range is minimized")
+        else:
+            shooterPowerAdj -= SHOOTER_STANDARD_CHANGE
+            print("range decreased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
     
     if shooterEnabled == True:
         pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, shooterPowerAdj))
@@ -225,12 +250,22 @@ def pressRB():
     #When pressed, increase shooter speed range
     global shooterPowerAdj
     global shooterEnabled
-    global SHOOTER_SPEED_CHANGE
-    if shooterPowerAdj >= 0.9:
-        print("range is maxed")
+    global SHOOTER_STANDARD_CHANGE
+    global yHeld
+    global SHOOTER_MAX
+
+    if yHeld == True:
+        if shooterPowerAdj >= SHOOTER_MAX:
+            print("range is maxed")
+        else:
+            shooterPowerAdj += SHOOTER_SMALL_CHANGE
+            print("range increased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
     else:
-        shooterPowerAdj += SHOOTER_SPEED_CHANGE
-        print("range increased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
+        if shooterPowerAdj >= SHOOTER_MAX:
+            print("range is maxed")
+        else:
+            shooterPowerAdj += SHOOTER_STANDARD_CHANGE
+            print("range increased, new shooterPowerAdj = ", round(shooterPowerAdj, 2))
 
     if shooterEnabled == True:
         pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, shooterPowerAdj))
