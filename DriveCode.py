@@ -146,8 +146,8 @@ def pressB():
         pwm.setServoPulse(fenceRight, remapServoPosition(0))
         fenceUp = False
     else:
-        pwm.setServoPulse(fenceLeft, remapServoPosition(135))
-        pwm.setServoPulse(fenceRight, remapServoPosition(45))
+        pwm.setServoPulse(fenceLeft, remapServoPosition(155))
+        pwm.setServoPulse(fenceRight, remapServoPosition(25))
         fenceUp = True
     print("Pressed B")
 
