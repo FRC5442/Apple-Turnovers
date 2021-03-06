@@ -148,6 +148,7 @@ def pressB():
     else:
         pwm.setServoPulse(servoLeft, remapServoPosition(90))
         pwm.setServoPulse(servoRight, remapServoPosition(90))
+        sideServoZeroed = False
     print("Pressed B")
 
 def pressY():
@@ -159,6 +160,7 @@ def pressY():
         testServoZeroed = True
     else:
         pwm.setServoPulse(servoTest, remapServoPosition(90))
+        testServoZeroed = False
     print("Pressed Y")
 
 def pressSTART():
