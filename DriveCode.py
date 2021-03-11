@@ -139,6 +139,8 @@ def toggleFence():
     #when pressed, drop fence or raise fence
     global fenceUp
 
+    print("Fence Toggled")
+
     if not fenceUp:
         pwm.setServoPulse(fenceLeft, remapServoPosition(85))
         pwm.setServoPulse(fenceRight, remapServoPosition(95))
@@ -151,6 +153,9 @@ def toggleFence():
 
 def toggleManip():
     #When pressed, print pressed
+
+    print("Manipulator Toggled")
+
     pwm.setServoPulse(manip, remapServoPosition(25))
     time.sleep(0.5)
     pwm.setServoPulse(manip, remapServoPosition(180))
@@ -204,14 +209,14 @@ def limitDrive():
     global powerAdj
 
     powerAdj = 0.25
-    print("Trigger pressed")
+    print("Drive Limit")
 
 def unlimitDrive():
     #When released, speed range returned to normal
     global powerAdj
 
     powerAdj = 0.5
-    print("Trigger released")
+    print("Drive Unlimited")
 
 def switchHead():
     #When pressed, toggle head reverse
