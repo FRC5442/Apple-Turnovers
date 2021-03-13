@@ -129,7 +129,7 @@ def enableGenearicHandlers():
 def loadBall():
     pwm.setServoPulse(shooter, remapShooter(1, centerAdj, 0.6))
     print("Loading Shooter")
-    time.delay(2.5)
+    time.sleep(2.5)
     pwm.setServoPulse(shooter, remapShooter(0, centerAdj, 0))
 
 def toggleShooter():
