@@ -97,7 +97,7 @@ def exitProc():
     gamepad.disconnect()
 
 def enableHandlers():
-    #gamepad.addButtonPressedHandler("A", toggleShooter)
+    gamepad.addButtonPressedHandler("A", loadBall)
     gamepad.addButtonPressedHandler("B", toggleShooter)
     gamepad.addButtonPressedHandler("X", switchHead)
     gamepad.addButtonPressedHandler("Y", toggleManip)
@@ -125,6 +125,12 @@ def enableGenearicHandlers():
 ---------------------------------'''
 
 ###    Buttons
+
+def loadBall():
+    pwm.setServoPulse(shooter, remapShooter(1, centerAdj, 0.6))
+    print("Loading Shooter")
+    time.delay(2.5)
+    pwm.setServoPulse(shooter, remapShooter(0, centerAdj, 0))
 
 def toggleShooter():
     #when pressed, turn shooter motor on
