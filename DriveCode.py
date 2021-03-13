@@ -130,6 +130,7 @@ def loadBall():
     pwm.setServoPulse(shooter, remapShooter(1, centerAdj, 0.6))
     print("Loading Shooter")
     time.sleep(2.5)
+    print("Done Loading")
     pwm.setServoPulse(shooter, remapShooter(0, centerAdj, 0))
 
 def toggleShooter():
