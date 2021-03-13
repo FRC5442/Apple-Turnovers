@@ -129,7 +129,7 @@ def enableGenearicHandlers():
 def loadBall():
     pwm.setServoPulse(shooter, remapShooter(1, centerAdj, 0.6))
     endTime = time.time() + 2.5
-    while time.time < endTime {
+    while (time.time < endTime) {
         print("Loading...")
     }
     print("Done Loading")
