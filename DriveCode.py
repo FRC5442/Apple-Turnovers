@@ -90,6 +90,9 @@ def remapDrive(rawInput, centAdj, pwrAdj):
 def exitProc():
     #method to disconnect controller and end program
     print("---Controller Disconnected---")
+    pwm.setServoPulse(leftMotor, remapDrive(0, centerAdj, powerAdj))
+    pwm.setServoPulse(rightMotor, remapDrive(0, centerAdj, powerAdj))
+    pwm.setServoPulse(shooter, remapDrive(0, centerAdj, powerAdj))
     GPIO.output(enableLED, GPIO.LOW)    
     gamepad.disconnect()
 
