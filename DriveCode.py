@@ -10,6 +10,7 @@ from PCA9685 import PCA9685
 import Gamepad
 import RPi.GPIO as GPIO
 import time
+from threading import Thread
 
 pwm = PCA9685(0x40)
 pwm.setPWMFreq(50)
@@ -127,11 +128,12 @@ def enableGenearicHandlers():
 ###    Buttons
 
 def loadBall():
-    pwm.setServoPulse(shooter, remapShooter(1, centerAdj, 0.6))
-    endTime = time.time() + 2.5
-    while (time.time() < endTime) :
-        print("Loading...")
+    Thread(target = beginLoad).start()
 
+def beginLoad():
+    pwm.setServoPulse(shooter, remapShooter(1, centerAdj, 0.6))
+    print("Loading...")
+    time.sleep(2.5)
     print("Done Loading")
     pwm.setServoPulse(shooter, remapShooter(0, centerAdj, 0))
 
