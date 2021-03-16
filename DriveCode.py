@@ -41,7 +41,8 @@ leftMotor = 0
 rightMotor = 1
 shooter = 2
 shooterSingulation = 3
-servo2 = 4
+LASER_1 = 21
+LASER_2 = 20
 
 servoLoaderPositionEngaged = 110       #the engaged position for the loader
 servoLoaderPositionRest = 70            #The rest position for the loader
@@ -76,6 +77,8 @@ shooterPowerAdj = 0.5       #Default power precentage for shooter motor
 
 
 GPIO.setup(enableLED, GPIO.OUT)     #Setting up enable LED for output
+GPIO.setup(LASER_1, GPIO.OUT)
+GPIO.setup(LASER_2, GPIO.OUT)
 
 '''---------------------------------
 
@@ -180,15 +183,15 @@ def releaseB():
 
 def pressX():
     #when pressed, turn servo
-    global servo2PositionEngaged
-    pwm.setServoPulse(servo2, remapServoPosition(servo2PositionEngaged))
-    print("Pressed X: Servo set to: ", servo2PositionEngaged)
+    print("Pressed X: Lasers ON")
+    GPIO.output(LASER_1, GPIO.HIGH)
+    GPIO.output(LASER_2, GPIO.HIGH)
 
 def releaseX():
     #when released, reset servo
-    global servo2PositionRest
-    pwm.setServoPulse(servo2, remapServoPosition(servo2PositionRest))
-    print("Released X: Servo set to: ", servo2PositionRest)
+    print("Released X: Lasers OFF")
+    GPIO.output(LASER_1, GPIO.LOW)
+    GPIO.output(LASER_2, GPIO.LOW)
 
 def pressY():
     global yHeld
