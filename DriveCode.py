@@ -57,7 +57,7 @@ SLOW_DRIVE_POWER = .25          #Adjust for limit on pwm range for drive when mo
 centerAdj = 80                  #Adjust center of pwm range for drive
 
 SHOOTER_STANDARD_CHANGE = 0.05      #Adjust for shooter speed increments
-SHOOTER_SMALL_CHANGE = 0.02          #Adjust for smaller shooter speed increments
+SHOOTER_SMALL_CHANGE = 0.01         #Adjust for smaller shooter speed increments
 
 SHOOTER_MIN = 0.2
 SHOOTER_MAX = 0.95
@@ -73,7 +73,7 @@ yHeld = False               #Boolean value to determine if y is held
 
 
 powerAdj = DRIVE_POWER      #setting changable powerAdj to 
-shooterPowerAdj = 0.5       #Default power precentage for shooter motor
+shooterPowerAdj = 0.22       #Default power precentage for shooter motor
 
 
 GPIO.setup(enableLED, GPIO.OUT)     #Setting up enable LED for output
