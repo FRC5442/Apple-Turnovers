@@ -350,7 +350,7 @@ def moveStraight(position):
         print("Moving straight")
 
 def autoCode(position):
-    pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, 0.92))
+    pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, 0.33))
     time.sleep(.05)
     pressB()
     time.sleep(0.5)
@@ -368,7 +368,7 @@ def autoCode(position):
     time.sleep(0.5)
     releaseB()
     time.sleep(1)
-    pwm.setServoPulse(shooter, remapShooter(0, centerAdj, 0.92))
+    pwm.setServoPulse(shooter, remapShooter(0, centerAdj, 0.33))
 
     
     
