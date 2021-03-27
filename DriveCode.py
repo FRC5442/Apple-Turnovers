@@ -10,6 +10,7 @@
 from PCA9685 import PCA9685
 import Gamepad
 import RPi.GPIO as GPIO
+import time
 
 
 
@@ -136,6 +137,7 @@ def enableHandlers():
     gamepad.addAxisMovedHandler("LEFT-Y", moveLeftY)
     gamepad.addAxisMovedHandler("RIGHT-Y", moveRightY)
     gamepad.addAxisMovedHandler("DPAD-Y", moveStraight)
+    gamepad.addAxisMovedHandler("DPAD-X", autoCode)
 
 def enableGenearicHandlers():
     #Method to enable necessary event handlers
@@ -347,7 +349,22 @@ def moveStraight(position):
         pwm.setServoPulse(rightMotor, remapDrive(position, centerAdj, .25))
         print("Moving straight")
 
+def autoCode(position):
+    pwm.setServoPulse(shooter, remapShooter(-1, centerAdj, 0.97))
+    time.sleep(.05)
+    pressB()
+    time.sleep(0.5)
+    releaseB()
+    time.sleep(0.5)
+    pressB()
+    time.sleep(0.5)
+    releaseB()
+    time.sleep(1)
+    pwm.setServoPulse(shooter, remapShooter(0, centerAdj, 0.97))
 
+    
+    
+    print("AutoCode Enabled")
 
 
 
