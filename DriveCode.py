@@ -73,7 +73,7 @@ yHeld = False               #Boolean value to determine if y is held
 
 
 powerAdj = DRIVE_POWER      #setting changable powerAdj to 
-shooterPowerAdj = 0.22       #Default power precentage for shooter motor
+shooterPowerAdj = 0.37       #Default power precentage for shooter motor
 
 
 GPIO.setup(enableLED, GPIO.OUT)     #Setting up enable LED for output
