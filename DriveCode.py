@@ -230,7 +230,7 @@ def unlimitDrive():
     #When released, speed range returned to normal
     global powerAdj
 
-    powerAdj = 0.5
+    powerAdj = 1
     print("Drive Unlimited")
 
 def switchHead():
