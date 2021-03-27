@@ -59,7 +59,7 @@ fenceRight = 5
 enableLED = 18
 
 GPIO.setup(enableLED, GPIO.OUT)
-
+GPIO.output(enableLED, GPIO.LOW)
 
 '''---------------------------------
 
