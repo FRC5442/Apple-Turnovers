@@ -259,24 +259,24 @@ def moveLeftY(position):
 
     if reverseHead == True:
         pwm.setServoPulse(rightMotor, remapDrive(-position, centerAdj, powerAdj))
-        print("Left Motor", remapDrive(-position, centerAdj, powerAdj))
-        print("Joystick Position: ", -position)
+        #print("Left Motor", remapDrive(-position, centerAdj, powerAdj))
+        #print("Joystick Position: ", -position)
     else:
         pwm.setServoPulse(leftMotor, remapDrive(-position, centerAdj, powerAdj))
-        print("Left Motor", remapDrive(-position, centerAdj, powerAdj))
-        print("Joystick Position: ", -position)
+        #print("Left Motor", remapDrive(-position, centerAdj, powerAdj))
+        #print("Joystick Position: ", -position)
 
 def moveRightY(position):
     #Map the right y joystick value to the right motor PWM output
     global reverseHead
     if reverseHead == True:
         pwm.setServoPulse(leftMotor, remapDrive(position, centerAdj, powerAdj))
-        print("Right Motor", remapDrive(position, centerAdj, powerAdj))
-        print("Joystick Position: ", position)
+        #print("Right Motor", remapDrive(position, centerAdj, powerAdj))
+        #print("Joystick Position: ", position)
     else:
         pwm.setServoPulse(rightMotor, remapDrive(position, centerAdj, powerAdj))
-        print("Right Motor", remapDrive(position, centerAdj, powerAdj))
-        print("Joystick Position: ", position)
+        #print("Right Motor", remapDrive(position, centerAdj, powerAdj))
+        #print("Joystick Position: ", position)
 
 def moveStraight(position):
     global reverseHead
