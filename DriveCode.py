@@ -45,7 +45,7 @@ shooterRange = 1000
 shooterMin = 1000
 
 centerAdj = 0 #Adjust center of pwm range for drive
-powerAdj = 0.75 #Adjust limts of pwm range for drive (percentage)
+powerAdj = 0.85 #Adjust limts of pwm range for drive (percentage)
 
 shooterPowerAdj = 0.75
 
